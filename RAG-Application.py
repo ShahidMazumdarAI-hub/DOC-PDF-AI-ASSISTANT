@@ -2,8 +2,8 @@
 import os
 os.environ["GROQ_API_KEY"] = "pass your groq_api_key here"
 client = Groq(api_key="GROQ_API_KEY")
-from groq import Groq   #just checking the working of the models in GROQ
 
+from groq import Groq   #just checking the working of the models in GROQ
 client = Groq()
 completion = client.chat.completions.create(
     model="openai/gpt-oss-120b",
@@ -20,9 +20,9 @@ completion = client.chat.completions.create(
     stream=True,
     stop=None
 )
-
 for chunk in completion:
     print(chunk.choices[0].delta.content or "", end="")
+    
 
 #doing the necessary installations
 !pip install gradio
@@ -57,7 +57,8 @@ embedding_model = HuggingFaceEmbeddings(
 
 def process_document(pdf_file):
 
-    global vector_db
+    global vector_db  #The vector_db variable is declared as global because its value needs to be accessible and modifiable by multiple functions (process_document and ask_question) throughout the application's lifecycle.Without global, vector_db would be a local variable within process_document, and its value would be lost after the function execution, making it inaccessible to ask_question.
+
 
     if pdf_file is None:
         return "Please upload a PDF Document first."
@@ -91,7 +92,7 @@ def process_document(pdf_file):
 # Question Answering Function
 def ask_question(question):
 
-    global vector_db
+    global vector_db   #The vector_db variable is declared as global because its value needs to be accessible and modifiable by multiple functions (process_document and ask_question) throughout the application's lifecycle.Without global, vector_db would be a local variable within process_document, and its value would be lost after the function execution, making it inaccessible to ask_question.
 
     if vector_db is None:
         return "Please upload and process a PDF document first."
