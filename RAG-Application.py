@@ -3,6 +3,7 @@ import os
 os.environ["GROQ_API_KEY"] = "pass your groq_api_key here"
 client = Groq(api_key="GROQ_API_KEY")
 
+#Groq is an AI company that developed the Language Processing Unit (LPU), a specialized chip designed specifically for high-speed AI inference, not training. It offers significantly lower latency and faster response times for Large Language Models (LLMs) compared to GPUs, enabling real-time generative AI applications.
 from groq import Groq   #just checking the working of the models in GROQ
 client = Groq()
 completion = client.chat.completions.create(
